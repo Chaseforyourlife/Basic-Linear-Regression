@@ -6,7 +6,21 @@ BEST FIT LINE ALGORITHIM
 """
 import random
 import math
-points = [(1,1.5),(2,3),(3,4.5),(4,7),(4,5)]
+import matplotlib.pyplot as plt
+
+demo_or_try = input("Would you like to demo or try new points? ('demo'/'try')")
+
+def get_input_points():
+    points = list()
+    number_of_points = int(input("How many points would you like to give"))
+    for i in range(number_of_points):
+        given_x = int(input(f"Point {i} x coordinate: "))
+        given_y = int(input(f"Point {i} y coordinate: "))
+        points.append((given_x,given_y))
+    return points
+points = sorted([(1,1.5),(2,3),(3,4.5),(4,7),(4,5)]) if demo_or_try == 'demo' else sorted(get_input_points())
+
+
 test_signs = [(1,1),(1,-1),(-1,1),(-1,-1)]
 
 def find_error(params):
@@ -59,3 +73,9 @@ while(GRADE > 0.0001):
 print("\n")
 print("B0:",B0)
 print("B1:",B1)
+
+x_points = [point[0] for point in points]
+y_points = [point[1] for point in points]
+plt.plot(x_points,y_points,'ro')
+plt.plot([x_points[0],x_points[-1]],[B0+x_points[0]*B1,B0+x_points[-1]*B1])
+plt.show()
